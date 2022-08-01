@@ -9,21 +9,18 @@ describe("Incorrect test Foo", () => {
     expect(screen.getByTestId("div")).toHaveTextContent("1");
   });
 
-  test("前の spyOn の影響により、結果が予期したものにならない。このテストは失敗する可能性がある", async () => {
+  test("前の spyOn の影響により、結果が予期したものにならない", async () => {
     render(<Foo />);
     expect(screen.getByTestId("div")).not.toHaveTextContent("0");
   });
 });
 
 describe("Correct test Foo", () => {
-  beforeEach(() => {
-    jest.restoreAllMocks();
-  });
-
   test("spyOn を実行する", async () => {
-    jest.spyOn(functions, "getZero").mockReturnValue(1);
+    const spy = jest.spyOn(functions, "getZero").mockReturnValue(1);
     render(<Foo />);
     expect(screen.getByTestId("div")).toHaveTextContent("1");
+    spy.mockRestore();
   });
 
   test("前の spyOn の影響を受けずに想定通りの結果になる", async () => {
