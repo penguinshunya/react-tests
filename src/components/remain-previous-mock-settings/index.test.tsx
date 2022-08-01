@@ -9,7 +9,7 @@ describe("Incorrect test Foo", () => {
     expect(screen.getByTestId("div")).toHaveTextContent("1");
   });
 
-  test("前の spyOn の影響により、結果が予期したものにならない", async () => {
+  test("前の spyOn の影響により、結果が想定通りにならない", async () => {
     render(<Foo />);
     expect(screen.getByTestId("div")).not.toHaveTextContent("0");
   });
