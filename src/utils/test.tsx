@@ -18,8 +18,7 @@ export async function waitForQueryToFinish<T>(
   spy: jest.SpyInstance<UseQueryResult<T, unknown>, []>
 ) {
   return waitFor(() => {
-    const len = spy.mock.results.length;
-    const res = spy.mock.results[len - 1];
+    const res = spy.mock.results.at(-1);
     expect(res?.type === "return" && !res.value.isFetching).toBe(true);
   });
 }
